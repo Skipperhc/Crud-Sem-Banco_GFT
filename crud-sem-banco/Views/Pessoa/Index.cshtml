@@ -1,0 +1,57 @@
+﻿@model IEnumerable<crud_sem_banco.Models.Pessoa>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Pessoas</h1>
+
+<p>
+    <a asp-controller="Pessoa" asp-action="Cadastrar" class="btn btn-success">Criar um novo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                Ações
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
+                    <form asp-controller="Pessoa" asp-action="Excluir" method="post" style="display: inline">
+                        <input name="id" value="@item.Id" class="form-control" hidden />
+                        <input type="submit" value="Excluir" class="btn btn-danger" onclick="return confirm('Você tem certeza que deseja fazer essa exclusão?');" />
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
